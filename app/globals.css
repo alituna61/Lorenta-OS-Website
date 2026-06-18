@@ -1,26 +1,214 @@
 @import "tailwindcss";
 
+@theme {
+  /* ============ Renkler ============ */
+  --color-canvas: #f7f5f2;
+  --color-surface: #ffffff;
+
+  --color-ink-primary: #0a0a0a;
+  --color-ink-secondary: #4a4a48;
+  --color-ink-tertiary: #8a8a86;
+
+  --color-accent-primary: #1a1a1a;
+  --color-accent-signal: #c9e36b;
+
+  --color-border-subtle: #e8e5e0;
+
+  --color-feedback-error: #c9351a;
+  --color-feedback-success: #1a6e3f;
+
+  /* ============ Landing (siyah/beyaz invert) marka rengi ============
+     Coming Soon estetiğinin imza lime'ı. Hem dark hem light temada vurgu. */
+  --color-signal: #000000;
+
+  /* Barlow — Coming Soon wordmark fontu. Layout'ta --font-barlow tanımlı. */
+  --font-barlow: var(--font-barlow-var), ui-sans-serif, system-ui, sans-serif;
+
+  /* ============ Tipografi Aileleri ============
+     next/font Inter ve JetBrains Mono değişkenlerini sarar.
+     Layout.tsx'te --font-inter ve --font-jetbrains-mono tanımlı. */
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-jetbrains-mono), ui-monospace, "SF Mono", Menlo, monospace;
+
+  /* ============ Tipografi Ölçeği ============ */
+  --text-micro: 0.75rem;
+  --text-micro--line-height: 1rem;
+
+  --text-small: 0.875rem;
+  --text-small--line-height: 1.25rem;
+
+  --text-body: 1.0625rem;
+  --text-body--line-height: 1.625rem;
+
+  --text-h4: 1.25rem;
+  --text-h4--line-height: 1.75rem;
+
+  --text-h3: 1.75rem;
+  --text-h3--line-height: 2.25rem;
+
+  --text-h2: 2.5rem;
+  --text-h2--line-height: 3rem;
+  --text-h2--letter-spacing: -0.02em;
+
+  --text-display: 3.5rem;
+  --text-display--line-height: 4rem;
+  --text-display--letter-spacing: -0.025em;
+
+  --text-hero: 4.5rem;
+  --text-hero--line-height: 5rem;
+  --text-hero--letter-spacing: -0.03em;
+
+  /* ============ Ek spacing ============ */
+  --spacing-section: 6rem;
+}
+
+/* ============ Base ============
+   Varsayılan light; tema invert'i ThemeProvider'daki data-inverted ile yönetilir. */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  color-scheme: light;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+/* ============ Tema invert — semantik token'ları çevir ============
+   Eski alt sayfalar (canvas/ink/surface/border) bu token'ları kullanıyor.
+   data-inverted="false" (DARK tema, opt-in) durumunda token değerlerini
+   koyu paletle ezeriz; böylece tüm sayfalar tek noktadan temaya uyar.
+   data-inverted="true" (LIGHT, varsayılan) @theme'deki açık değerleri kullanır. */
+[data-inverted="false"] {
+  color-scheme: dark;
+
+  --color-canvas: #0a0a0a;
+  --color-surface: #161616;
+
+  --color-ink-primary: #f5f5f4;
+  --color-ink-secondary: #b9b9b6;
+  --color-ink-tertiary: #8a8a86;
+
+  --color-accent-primary: #f5f5f4;
+
+  --color-border-subtle: #2a2a28;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html,
+body {
+  background-color: var(--color-canvas);
+  color: var(--color-ink-primary);
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans);
+  font-feature-settings: "ss01", "cv11";
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Focus stilinin Sessiz Lüks versiyonu */
+*:focus-visible {
+  outline: 2px solid var(--color-ink-primary);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+/* ============ Animasyonlar ============ */
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+/* Maskot göz kırpma (wake-blink) — `scale` ayrı özelliğini kullanır,
+   böylece JS kaynaklı `translate` ile çakışmadan kompoze olur. */
+@keyframes lorenta-pupil-wake {
+  0%, 100% { scale: 1 1; }
+  50% { scale: 1 0.04; }
+}
+
+/* Scroll-reveal: bölümler görünür alana girince yumuşakça belirir */
+@keyframes lorenta-reveal {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.reveal-init {
+  opacity: 0;
+}
+.reveal-in {
+  animation: lorenta-reveal 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-pupil-wake] { animation: none !important; }
+  .reveal-init { opacity: 1 !important; }
+  .reveal-in { animation: none !important; }
+}
+
+.animate-marquee {
+  animation: marquee 28s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-marquee {
+    animation: none;
+  }
+}
+
+@keyframes fade-in-down {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+.animate-fade-in-down {
+  animation: fade-in-down 0.15s ease-out forwards;
+}
+
+.animate-fade-in {
+  animation: fade-in 0.2s ease-out forwards;
+}
+
+/* Smooth scroll — sadece motion tercih etmeyenlerde aktif */
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+/* Reduced motion saygısı */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Text selection — marka rengiyle */
+::selection {
+  background-color: var(--color-accent-signal);
+  color: var(--color-ink-primary);
+}
+
+/* Scrollbar — minimal, sadece WebKit */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-border-subtle);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-ink-tertiary);
 }

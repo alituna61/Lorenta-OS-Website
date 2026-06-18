@@ -1,36 +1,69 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# LorentaOS — Web
 
-## Getting Started
+**The Cognitive Operating System for Autonomous Enterprises.**
 
-First, run the development server:
+Bu repo, LorentaOS markasının halka açık web sitesini barındırır. Tasarım sistemi "Sessiz Lüks" eksenindedir; mühendislik tarafı modern, az bağımlı ve performans-odaklıdır.
+
+## Tech Stack
+
+| Katman       | Seçim                                  |
+| ------------ | -------------------------------------- |
+| Framework    | Next.js 16 (App Router)                |
+| Dil          | TypeScript (strict)                    |
+| Stil         | Tailwind CSS v4 (`@theme` CSS-first)   |
+| Tipografi    | Inter + JetBrains Mono via `next/font` |
+| Lint         | ESLint 9 (`eslint-config-next`)        |
+| Hosting      | Vercel (planlı)                        |
+| Bundler      | Turbopack (dev + build)                |
+
+## Yerel Geliştirme
 
 ```bash
+# Geliştirme sunucusu
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+
+# Production build
+npm run build
+
+# Production preview
+npm run start
+
+# Lint
+npm run lint
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Tarayıcı: [http://localhost:3000](http://localhost:3000)
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Klasör Mimarisi
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```
+app/                  → Next.js App Router (route'lar + global layout)
+  layout.tsx          → Root layout, font yükleme, Nav + Footer
+  page.tsx            → Anasayfa
+  globals.css         → Tailwind v4 @theme tokenları + base stiller
 
-## Learn More
+components/
+  layout/             → Nav, Footer
+  ui/                 → Button, Container, Section (primitive'ler)
+  sections/           → Sayfa-bazlı kompozisyonlar (ileride)
 
-To learn more about Next.js, take a look at the following resources:
+lib/                  → Yardımcılar (cn, site config, vb.)
+content/              → Statik içerik (MDX/JSON — ileride CMS taşınacak)
+types/                → Paylaşılan TypeScript tipleri
+public/               → Statik varlıklar (görsel, font, manifest)
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Design Tokens
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Tüm renk, tipografi ve spacing tokenları `app/globals.css` içindeki `@theme` bloğunda tek noktadan tanımlıdır. Yeni bir token eklemek için orayı düzenle — Tailwind utility class'ı otomatik üretilir (`--color-x` → `bg-x`, `text-x`, `border-x`).
 
-## Deploy on Vercel
+## Konvansiyonlar
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- **Import alias:** `@/` repo köküne çözer (örn. `@/components/ui/Button`).
+- **Component dosya adları:** PascalCase (`Button.tsx`).
+- **Yardımcılar:** camelCase (`cn.ts`, `site.ts`).
+- **Tüm metinler** önce EN, sonra TR. i18n entegrasyonu sonraki fazda.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Lisans
+
+© Lorenta OS. Tüm hakları saklıdır.
