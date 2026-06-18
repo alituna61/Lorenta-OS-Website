@@ -9,7 +9,15 @@ export const metadata: Metadata = {
     "Kim olduğumuzu, hangi pozisyonlar için işe aldığımızı ve bize nasıl ulaşacağınızı öğrenin.",
 };
 
-const links = [
+// TypeScript'in kafasının karışmasını engellemek için tipi açıkça tanımlıyoruz:
+type CompanyLink = {
+  label: string;
+  href: string;
+  description: string;
+};
+
+// Array'e bu tipi (CompanyLink[]) zorunlu tutuyoruz:
+const links: CompanyLink[] = [
   {
     label: "Hakkımızda",
     href: "/company/about",
