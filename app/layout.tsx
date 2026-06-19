@@ -29,6 +29,7 @@ const barlow = Barlow({
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
+  manifest: "/manifest.webmanifest",
   title: {
     default: `${siteConfig.name} — ${siteConfig.positioning}`,
     template: `%s — ${siteConfig.name}`,
