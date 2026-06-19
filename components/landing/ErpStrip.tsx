@@ -4,7 +4,7 @@ import { Container } from "@/components/ui/Container";
 /*
   📌 LOGO DOSYALARI — public/logos/ altında
   Gerçek marka logolarını aşağıdaki dosya adlarıyla koyun:
-  - public/logos/logo.svg         → Logo 
+  - public/logos/yaz_logo.svg         → Logo 
   - public/logos/mikro.svg        → Mikro
   - public/logos/sap.svg          → SAP
   - public/logos/whatsapp.svg     → WhatsApp Business
@@ -16,7 +16,7 @@ import { Container } from "@/components/ui/Container";
 // Gözüne büyük/küçük gelen logoları 'scale' değeriyle ayarlayabilirsin.
 // Örnek: 'scale-90' %10 küçültür, 'scale-110' %10 büyütür. Normal boyutu 'scale-100'dür.
 const integrations = [
-  { name: "Logo",              file: "logo.svg",         w: 110, scale: "scale-80" },
+  { name: "Logo",              file: "yaz_logo.svg",         w: 110, scale: "scale-80" },
   { name: "Mikro",             file: "mikro.svg",        w: 80,  scale: "scale-200" },
   { name: "SAP",               file: "sap.svg",          w: 56,  scale: "scale-90"  }, // Genelde kare olanlar büyük görünür, küçültmek iyi olabilir.
   { name: "WhatsApp Business", file: "whatsapp.svg",     w: 150, scale: "scale-120" },
