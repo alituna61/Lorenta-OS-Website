@@ -24,7 +24,6 @@ export default function Home() {
       <Agents />
       <Stats />
       <ComparisonTable />
-      <Testimonials />
       <Faq />
       <FinalCta />
     </>
