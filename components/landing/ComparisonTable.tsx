@@ -95,7 +95,7 @@ export function ComparisonTable() {
               Diğerleri Veriyi Gösterir. Lorenta OS Aksiyona Dönüştürür.
             </h2>
             <p className="mx-auto mt-4 max-w-xl text-base text-white/55 group-data-[inverted=true]/theme:text-black/55">
-              Mevcut ERP'niz veriyi pasif olarak saklar, genel yapay zeka
+              Mevcut ERP&apos;niz veriyi pasif olarak saklar, genel yapay zeka
               araçları ise kurumsal bağlamdan yoksundur. Lorenta OS, otonom
               aksiyon alarak ikisi arasındaki boşluğu dolduran tek katmandır.
             </p>
@@ -109,7 +109,7 @@ export function ComparisonTable() {
                     Özellik
                   </th>
                   <th className="px-4 py-4 text-center font-medium text-white/50 group-data-[inverted=true]/theme:text-black/50">
-                    <span className="block">Yerel ERP'ler</span>
+                    <span className="block">Yerel ERP&apos;ler</span>
                     <span className="mt-0.5 block font-mono text-[10px] font-normal text-white/30 group-data-[inverted=true]/theme:text-black/35">
                       Logo / Mikro
                     </span>
@@ -134,7 +134,7 @@ export function ComparisonTable() {
                 {rows.map((row, i) => (
                   <tr
                     key={row.criterion}
-                    className={`border-b border-white/5 transition-colors hover:bg-white/[0.03] group-data-[inverted=true]/theme:border-black/5 group-data-[inverted=true]/theme:hover:bg-black/[0.03] ${
+                    className={`border-b border-white/5 transition-colors hover:bg-white/3 group-data-[inverted=true]/theme:border-black/5 group-data-[inverted=true]/theme:hover:bg-black/3 ${
                       i === rows.length - 1 ? "border-b-0" : ""
                     }`}
                   >

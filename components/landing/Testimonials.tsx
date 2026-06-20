@@ -88,24 +88,24 @@ export function Testimonials() {
               key={i}
               delay={i * 90}
               as="article"
-              className="group/card relative flex flex-col overflow-hidden rounded-2xl border border-white/[0.07] bg-white/[0.025] transition-all duration-300 hover:border-[#B5FF4D]/25 hover:bg-white/[0.04] group-data-[inverted=true]/theme:border-black/[0.08] group-data-[inverted=true]/theme:bg-white group-data-[inverted=true]/theme:shadow-sm group-data-[inverted=true]/theme:hover:border-black/[0.15] group-data-[inverted=true]/theme:hover:shadow-md"
+              className="group/card relative flex flex-col overflow-hidden rounded-2xl border border-white/[0.07] bg-white/2.5 transition-all duration-300 hover:border-[#B5FF4D]/25 hover:bg-white/4 group-data-[inverted=true]/theme:border-black/8 group-data-[inverted=true]/theme:bg-white group-data-[inverted=true]/theme:shadow-sm group-data-[inverted=true]/theme:hover:border-black/15 group-data-[inverted=true]/theme:hover:shadow-md"
             >
-              <div className="h-[2px] w-full bg-gradient-to-r from-transparent via-[#B5FF4D] to-transparent opacity-25 transition-opacity duration-300 group-hover/card:opacity-70 group-data-[inverted=true]/theme:via-green-500" />
+              <div className="h-0.5 w-full bg-linear-to-r from-transparent via-[#B5FF4D] to-transparent opacity-25 transition-opacity duration-300 group-hover/card:opacity-70 group-data-[inverted=true]/theme:via-green-500" />
 
               <div className="flex items-start justify-between gap-4 px-6 pt-6">
-                <div className="relative flex items-center justify-center rounded-xl border border-white/[0.08] bg-gradient-to-b from-white/[0.04] to-transparent p-1 shadow-lg shadow-black/20 backdrop-blur-sm transition-all duration-300 group-hover/card:border-[#B5FF4D]/30 group-hover/card:bg-white/[0.06] group-data-[inverted=true]/theme:border-black/[0.08] group-data-[inverted=true]/theme:from-black/[0.03] group-data-[inverted=true]/theme:shadow-sm">
+                <div className="relative flex items-center justify-center rounded-xl border border-white/8 bg-linear-to-b from-white/4 to-transparent p-1 shadow-lg shadow-black/20 backdrop-blur-sm transition-all duration-300 group-hover/card:border-[#B5FF4D]/30 group-hover/card:bg-white/6 group-data-[inverted=true]/theme:border-black/8 group-data-[inverted=true]/theme:from-black/3 group-data-[inverted=true]/theme:shadow-sm">
   
                   <Image
                     src={t.companyLogo}
                     alt={`${t.company} logosu`}
                     width={200}
                     height={80}
-                    className="relative z-10 h-20 w-auto max-w-[200px] object-contain opacity-85 transition-opacity duration-300 group-hover/card:opacity-100"
+                    className="relative z-10 h-20 w-auto max-w-50 object-contain opacity-85 transition-opacity duration-300 group-hover/card:opacity-100"
                   />
                 </div>
 
                 <div className="flex flex-col items-end text-right">
-                  <span className="mb-3 rounded-full bg-[#B5FF4D]/[0.09] px-3 py-1 text-[11px] font-semibold text-[#B5FF4D] group-data-[inverted=true]/theme:bg-green-100 group-data-[inverted=true]/theme:text-green-700">
+                  <span className="mb-3 rounded-full bg-[#B5FF4D]/9 px-3 py-1 text-[11px] font-semibold text-[#B5FF4D] group-data-[inverted=true]/theme:bg-green-100 group-data-[inverted=true]/theme:text-green-700">
                     {t.erp}
                   </span>
                   <div className="flex items-baseline gap-2">
@@ -122,7 +122,7 @@ export function Testimonials() {
                 </div>
               </div>
 
-              <div className="mx-6 mt-6 h-px bg-white/[0.05] group-data-[inverted=true]/theme:bg-black/10" />
+              <div className="mx-6 mt-6 h-px bg-white/5 group-data-[inverted=true]/theme:bg-black/10" />
 
               <p className="flex-1 px-6 pb-2 pt-5 text-[15px] font-light leading-[1.8] text-white/75 group-data-[inverted=true]/theme:text-black/80">
                 {t.quote}
@@ -134,7 +134,7 @@ export function Testimonials() {
                   alt={t.name}
                   width={40}
                   height={40}
-                  className="h-10 w-10 flex-shrink-0 rounded-full object-cover ring-1 ring-white/10 group-data-[inverted=true]/theme:ring-black/10"
+                  className="h-10 w-10 shrink-0 rounded-full object-cover ring-1 ring-white/10 group-data-[inverted=true]/theme:ring-black/10"
                 />
                 <div>
                   <p className="text-sm font-semibold text-white group-data-[inverted=true]/theme:text-black">

@@ -155,6 +155,9 @@ function Brand({ onHomeClick }: { onHomeClick?: () => void }) {
     const LERP = 0.13; 
     const IDLE_DELAY = 1500; 
     const IDLE_AMP = 0.35; 
+    
+    const DEFAULT_X = 1.5;
+    const DEFAULT_Y = -2.5;
 
     let eyeX = 0;
     let eyeY = 0;
@@ -167,15 +170,17 @@ function Brand({ onHomeClick }: { onHomeClick?: () => void }) {
 
     let mouseX = eyeX;
     let mouseY = eyeY;
-    let lastMoveAt = performance.now();
+    let lastMoveAt = 0; 
+    let hasBlinkedForIdle = true;
 
-    let curX = 0;
-    let curY = 0;
+    let curX = DEFAULT_X;
+    let curY = DEFAULT_Y;
 
     const onPointerMove = (e: PointerEvent) => {
       mouseX = e.clientX;
       mouseY = e.clientY;
       lastMoveAt = performance.now();
+      hasBlinkedForIdle = false;
     };
 
     window.addEventListener("pointermove", onPointerMove, { passive: true });
@@ -187,20 +192,28 @@ function Brand({ onHomeClick }: { onHomeClick?: () => void }) {
       let tgtX = 0;
       let tgtY = 0;
 
-      const dx = mouseX - eyeX;
-      const dy = mouseY - eyeY;
-      const dist = Math.hypot(dx, dy);
-
-      if (dist > 0.5) {
-        const magnitude = Math.tanh(dist / FALLOFF) * MAX_OFFSET;
-        tgtX = (dx / dist) * magnitude;
-        tgtY = (dy / dist) * magnitude;
-      }
-
       if (now - lastMoveAt > IDLE_DELAY) {
+        if (!hasBlinkedForIdle) {
+            blinkOnce();
+            hasBlinkedForIdle = true;
+        }
+
+        tgtX = DEFAULT_X;
+        tgtY = DEFAULT_Y;
+        
         const t = now / 1000;
         tgtX += Math.sin(t * 0.7) * IDLE_AMP;
         tgtY += Math.cos(t * 0.53) * IDLE_AMP * 0.7;
+      } else {
+        const dx = mouseX - eyeX;
+        const dy = mouseY - eyeY;
+        const dist = Math.hypot(dx, dy);
+
+        if (dist > 0.5) {
+          const magnitude = Math.tanh(dist / FALLOFF) * MAX_OFFSET;
+          tgtX = (dx / dist) * magnitude;
+          tgtY = (dy / dist) * magnitude;
+        }
       }
 
       curX += (tgtX - curX) * LERP;
@@ -218,7 +231,7 @@ function Brand({ onHomeClick }: { onHomeClick?: () => void }) {
       window.removeEventListener("scroll", measure);
       window.removeEventListener("resize", measure);
     };
-  }, []);
+  }, [blinkOnce]); 
 
   return (
     <div className="flex h-16 items-center gap-2.5">
@@ -238,7 +251,7 @@ function Brand({ onHomeClick }: { onHomeClick?: () => void }) {
         onClick={toggle}
         aria-label={inverted ? "Koyu temaya geç" : "Açık temaya geç"}
         title={inverted ? "Koyu temaya geç" : "Açık temaya geç"}
-        className="relative flex h-full w-16 flex-shrink-0 items-center justify-center rounded-sm outline-none origin-bottom-left select-none overflow-hidden group/logo"
+        className="relative flex h-full w-16 shrink-0 items-center justify-center rounded-sm outline-none origin-bottom-left select-none overflow-hidden group/logo"
         style={{
           transform: pressing ? "scale(1.05)" : "scale(1)",
           transition: "transform 220ms ease-out",
@@ -250,7 +263,7 @@ function Brand({ onHomeClick }: { onHomeClick?: () => void }) {
           fill
           sizes="64px"
           priority
-          className="object-contain transition-[opacity] duration-300"
+          className="object-contain transition-opacity duration-300"
         />
 
         <div
@@ -276,7 +289,7 @@ function Brand({ onHomeClick }: { onHomeClick?: () => void }) {
         <div
           ref={pupilRef}
           aria-hidden="true"
-          className={`absolute h-[5px] w-[5px] rounded-full transition-colors duration-500 ease-out ${
+          className={`absolute h-1.25 w-1.25 rounded-full transition-colors duration-500 ease-out ${
             inverted ? "bg-black" : "bg-white"
           }`}
           style={{
@@ -316,7 +329,7 @@ function DesktopDropdown({
   const { overview, items } = item.dropdown;
 
   return (
-    <div className="animate-fade-in-down absolute left-1/2 top-full z-50 w-[460px] -translate-x-1/2 pt-3">
+    <div className="animate-fade-in-down absolute left-1/2 top-full z-50 w-115 -translate-x-1/2 pt-3">
       <div
         className="overflow-hidden rounded-2xl border border-white/10 bg-zinc-950 shadow-2xl
                    group-data-[inverted=true]/theme:border-black/10
@@ -327,7 +340,7 @@ function DesktopDropdown({
           onClick={onClose}
           className="group/row flex items-center justify-between border-b border-white/10 px-5 py-4 transition-colors hover:bg-white/5
                      group-data-[inverted=true]/theme:border-black/10
-                     group-data-[inverted=true]/theme:hover:bg-black/[0.04]"
+                     group-data-[inverted=true]/theme:hover:bg-black/4"
         >
           <div>
             <p className="text-sm font-medium text-white group-data-[inverted=true]/theme:text-black">
@@ -349,7 +362,7 @@ function DesktopDropdown({
               onClick={onClose}
               className={`bg-zinc-950 px-5 py-4 transition-colors hover:bg-white/5
                          group-data-[inverted=true]/theme:bg-white
-                         group-data-[inverted=true]/theme:hover:bg-black/[0.04] ${
+                         group-data-[inverted=true]/theme:hover:bg-black/4 ${
                            sub.colSpan
                              ? "col-span-2 flex flex-col items-center justify-center text-center"
                              : ""
@@ -518,7 +531,7 @@ export function Nav() {
             />
             <span
               className={`h-px w-5 bg-white transition-transform duration-200 group-data-[inverted=true]/theme:bg-black ${
-                mobileOpen ? "-translate-y-[3.5px] -rotate-45" : ""
+                mobileOpen ? "translate-y-[-3.5px] -rotate-45" : ""
               }`}
             />
           </button>

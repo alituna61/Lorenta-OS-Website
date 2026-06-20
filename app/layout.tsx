@@ -91,6 +91,18 @@ export default function RootLayout({
           contactType: "sales",
         },
         sameAs: [siteConfig.social.linkedin, siteConfig.social.x],
+        founder: [
+        {
+          "@type": "Person",
+          name: "Ali Tuna",
+          sameAs: "https://www.linkedin.com/in/alituna/"
+        },
+        {
+          "@type": "Person",
+          name: "Şimal Çandar",
+          sameAs: "https://www.linkedin.com/in/simalcandar/"
+        }
+      ]
       },
       {
         "@type": "WebSite",

@@ -48,7 +48,7 @@ export function TrustBadges() {
               key={b.label}
               className="flex items-center gap-3.5 rounded-2xl border border-white/10 bg-white/[0.02] px-5 py-4 group-data-[inverted=true]/theme:border-black/10 group-data-[inverted=true]/theme:bg-black/[0.02]"
             >
-              <span className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-xl bg-signal/15 text-signal">
+              <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-signal/15 text-signal">
                 <svg
                   width="20"
                   height="20"

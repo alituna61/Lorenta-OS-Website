@@ -26,7 +26,7 @@ export function Hero() {
       {/* Hafif ambians ışıması — signal lime, çok düşük opaklık */}
       <div
         aria-hidden
-        className="pointer-events-none absolute -top-40 right-0 -z-10 h-[520px] w-[520px] rounded-full bg-signal/10 blur-[140px]"
+        className="pointer-events-none absolute -top-40 right-0 -z-10 h-130 w-130 rounded-full bg-signal/10 blur-[140px]"
       />
       <Container width="wide">
         <div className="grid grid-cols-1 gap-16 lg:grid-cols-[1.05fr_1fr] lg:items-center">
@@ -127,7 +127,7 @@ function BriefingMockup() {
           {kpis.map((kpi) => (
             <div
               key={kpi.label}
-              className="rounded-xl border border-white/10 bg-white/[0.03] p-3"
+              className="rounded-xl border border-white/10 bg-white/3 p-3"
             >
               <p className="mb-1 text-[10px] leading-tight text-white/45">
                 {kpi.label}
@@ -143,11 +143,11 @@ function BriefingMockup() {
           {agents.map((item) => (
             <div
               key={item.agent}
-              className="flex items-center justify-between rounded-xl border border-white/10 bg-white/[0.03] px-3 py-2.5"
+              className="flex items-center justify-between rounded-xl border border-white/10 bg-white/3 px-3 py-2.5"
             >
               <div className="flex items-center gap-3">
                 <span
-                  className={`h-1.5 w-1.5 flex-shrink-0 rounded-full ${
+                  className={`h-1.5 w-1.5 shrink-0 rounded-full ${
                     item.status === "running"
                       ? "animate-pulse bg-signal"
                       : "bg-white/30"
@@ -168,13 +168,13 @@ function BriefingMockup() {
         </div>
 
         {/* Sesli sorgu satırı */}
-        <div className="mt-4 flex items-center gap-3 rounded-xl border border-signal/30 bg-signal/[0.06] px-3 py-2.5">
+        <div className="mt-4 flex items-center gap-3 rounded-xl border border-signal/30 bg-signal/6 px-3 py-2.5">
           <svg
             width="15"
             height="15"
             viewBox="0 0 24 24"
             fill="none"
-            className="flex-shrink-0 text-signal"
+            className="shrink-0 text-signal"
             stroke="currentColor"
             strokeWidth="1.8"
             strokeLinecap="round"

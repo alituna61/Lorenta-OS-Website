@@ -18,7 +18,7 @@ export function Accordion({ items }: { items: Item[] }) {
           >
             <span className="text-h4 font-medium text-ink-primary">{item.q}</span>
             <span
-              className={`mt-1 flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full border border-border-subtle font-mono text-micro text-ink-tertiary transition-transform duration-200 ${
+              className={`mt-1 flex h-6 w-6 shrink-0 items-center justify-center rounded-full border border-border-subtle font-mono text-micro text-ink-tertiary transition-transform duration-200 ${
                 open === i ? "rotate-45" : ""
               }`}
             >

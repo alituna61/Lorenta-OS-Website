@@ -6,32 +6,32 @@ import { Reveal } from "@/components/landing/Reveal";
 
 const faqs = [
   {
-    q: "Verilerim nereye gidiyor?",
-    a: "Hiçbir yere gitmiyor, kalıyor. Lorenta OS, verilerinizi Türkiye sınırları içindeki sunucularda işler. Hiçbir iş veriniz yurt dışına çıkmaz, üçüncü taraf AI sağlayıcılarına gönderilmez. Kutu açılışından itibaren, KVKK tasarım gereği uyumlu bir mimariye sahipsiniz.",
+    q: "Lorenta OS nedir? Sadece bir yapay zeka asistanı mı?",
+    a: "Hayır. Lorenta OS, Türkiye'nin en gelişmiş yeni nesil Bilişsel İşletim Sistemi ve ana ERP altyapısıdır. Şirketinizin tüm finans, muhasebe, stok ve tedarik süreçlerini uçtan uca, otonom yapay zeka ajanlarıyla yönetir. Geleneksel ERP'lerin aksine, veriyi sadece saklamaz, operasyonu kendi kendine yürütür.",
   },
   {
-    q: "ERP sistemim bozulur mu?",
-    a: "Bozulmaz. Lorenta OS, mevcut ERP'inizin (Logo, Mikro) yanında çalışır, onu değiştirmez. Sisteminize salt-okuma + onaylı yazma erişimiyle bağlanır; kritik her işlem size onaylatılır. Mevcut iş süreçleriniz olduğu gibi çalışmaya devam eder.",
+    q: "Halihazırda Logo veya Mikro kullanıyorum, Lorenta OS'a geçmeli miyim?",
+    a: "En yüksek verimi Lorenta OS'u ana ERP sisteminiz olarak uçtan uca kullandığınızda alırsınız. Ancak mevcut altyapınızı hemen değiştirmek istemiyorsanız; Lorenta OS, Logo ve Mikro gibi geleneksel ERP sistemlerine sorunsuz entegre olur. Sisteminizi bozmadan, üzerine yapay zeka destekli otonom bir katman olarak da çalışabilir.",
   },
   {
-    q: "Kurulum ne kadar sürer?",
-    a: "İlk bağlantı için 30 dakika yeterli. ERP bağdaştırıcısını kuruyoruz, erişim izinlerini tanımlıyoruz ve ilk ajan görevlerini yapılandırıyoruz. IT ekibi gerektiren karmaşık bir altyapı kurulumu yok; standart bir kurulum için yalnızca ERP erişim bilgileriniz yeterli.",
+    q: "Eski ERP sistemimden Lorenta OS'a veri aktarımı zor mu?",
+    a: "Hayır, veri taşıma süreci tamamen otonomdur. Lorenta OS; eski sisteminizdeki cari hesaplar, stok kartları ve geçmiş faturalar gibi tüm verileri saniyeler içinde kendi ana altyapısına güvenle aktarır. Operasyonunuz hiçbir şekilde kesintiye uğramaz.",
   },
   {
-    q: "Çalışanlarım teknik olmadan kullanabilir mi?",
-    a: "Evet. Lorenta OS'un arayüzü, chatbot tarzı doğal dil arayüzüyle tasarlanmıştır. Muhasebeciden depo sorumlusuna kadar teknik bilgi gerektirmeden kullanılabilir.",
+    q: "Verilerim güvende mi? Yurtdışına çıkıyor mu?",
+    a: "Lorenta OS tavizsiz bir kapalı devre mimarisine sahiptir. Hiçbir iş veriniz yurt dışına çıkmaz veya üçüncü taraf (OpenAI, Microsoft vb.) yapay zeka sağlayıcılarına gönderilmez. KVKK'ya tasarım gereği (by-design) %100 uyumlu olarak kendi sunucularınızda veya yerel bulutta işlenir.",
   },
   {
-    q: "Sözleşme zorunluluğu var mı? Bağlı kalır mıyım?",
-    a: "Hayır. Tüm planlarımız aylık faturalanır ve istediğiniz zaman iptal edebilirsiniz. Verilerinizi her zaman dışarı aktarabilirsiniz.",
+    q: "Çalışanlarım teknik olmadan sistemi kullanabilir mi?",
+    a: "Evet. Lorenta OS, doğal dil işleme yeteneğine sahip gelişmiş bir arayüzle gelir. Muhasebeciniz veya depo sorumlunuz, sistemi günlük konuşma diliyle yönlendirerek karmaşık ERP işlemlerini saniyeler içinde, karmaşık menülerde boğulmadan gerçekleştirebilir.",
   },
   {
-    q: "ChatGPT veya Microsoft Copilot varken neden Lorenta?",
-    a: "Genel AI araçları muhteşem — genel amaçlı görevler için. Ama Logo ERP'inizden doğrudan fatura oluşturmak, ay sonu kapanışını otomatikleştirmek ya da Mikro'dan tedarik siparişi açmak için tasarlanmamışlar. Lorenta OS, Türk KOBİ operasyonuna özel olarak üretilmiş bir araçtır; verilerinizi yurt içinde tutar ve ERP sisteminize doğrudan yazar.",
+    q: "Kurulum süreci ne kadar sürer?",
+    a: "Geleneksel ERP'lerde aylar süren kurulum süreci, Lorenta OS'un yapay zeka destekli altyapısı sayesinde günler içinde tamamlanır. Eğer mevcut bir ERP'ye (Logo/Mikro) sadece entegre edilecekse, ilk bağlantı ve ajan görevlendirmeleri yalnızca 30 dakika sürer.",
   },
   {
     q: "Fiyat değişir mi? Gizli ücret var mı?",
-    a: "Sayfada gördüğünüz fiyat, ödediğiniz fiyattır. Kullanıcı başına gizli ek ücret, entegrasyon ücreti veya destek paketi dayatması yoktur. Kurulum dahil, ilk yıl teknik destek dahil.",
+    a: "Sayfada gördüğünüz fiyat, ödediğiniz fiyattır. Kullanıcı başına gizli ek ücret, entegrasyon ücreti veya destek paketi dayatması yoktur. Kurulum ve ilk yıl teknik destek dahildir.",
   },
 ];
 
@@ -65,7 +65,7 @@ export function Faq() {
                     {faq.q}
                   </span>
                   <span
-                    className={`mt-0.5 flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full border border-white/20 font-mono text-sm text-white/50 transition-transform duration-200 group-data-[inverted=true]/theme:border-black/20 group-data-[inverted=true]/theme:text-black/50 ${
+                    className={`mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full border border-white/20 font-mono text-sm text-white/50 transition-transform duration-200 group-data-[inverted=true]/theme:border-black/20 group-data-[inverted=true]/theme:text-black/50 ${
                       open === i ? "rotate-45" : ""
                     }`}
                   >

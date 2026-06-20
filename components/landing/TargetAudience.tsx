@@ -105,7 +105,7 @@ export function TargetAudience() {
             <ul className="flex flex-col gap-2">
               {notFits.map((text) => (
                 <li key={text} className="flex items-start gap-2.5 text-sm text-white/45 group-data-[inverted=true]/theme:text-black/45">
-                  <span className="mt-0.5 flex-shrink-0 font-mono text-white/25 group-data-[inverted=true]/theme:text-black/25">
+                  <span className="mt-0.5 shrink-0 font-mono text-white/25 group-data-[inverted=true]/theme:text-black/25">
                     ·
                   </span>
                   {text}

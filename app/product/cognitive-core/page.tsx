@@ -108,7 +108,7 @@ export default function CognitiveCorePage() {
                 <ul className="space-y-3">
                   {layer.points.map((p) => (
                     <li key={p} className="flex items-start gap-3">
-                      <span className="mt-1.5 h-1 w-1 flex-shrink-0 rounded-full bg-ink-tertiary" />
+                      <span className="mt-1.5 h-1 w-1 shrink-0 rounded-full bg-ink-tertiary" />
                       <span className="text-body text-ink-secondary">{p}</span>
                     </li>
                   ))}

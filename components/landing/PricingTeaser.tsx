@@ -99,7 +99,7 @@ export function PricingTeaser() {
                     key={f}
                     className="flex gap-2.5 text-sm text-white/70 group-data-[inverted=true]/theme:text-black/70"
                   >
-                    <span className="mt-1.5 h-1 w-1 flex-shrink-0 rounded-full bg-signal" />
+                    <span className="mt-1.5 h-1 w-1 shrink-0 rounded-full bg-signal" />
                     {f}
                   </li>
                 ))}

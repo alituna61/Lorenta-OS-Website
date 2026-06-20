@@ -323,15 +323,6 @@ const featureGroups: FeatureGroup[] = [
   },
 ];
 
-// ─── Score Calculator ─────────────────────────────────────────────────────────
-
-const allFeatures = featureGroups.flatMap((g) => g.features);
-const TOTAL = allFeatures.length;
-
-function getScore(key: CompKey | "lorenta"): number {
-  return allFeatures.filter((f) => f[key] === true).length;
-}
-
 // ─── Competitor Profiles ──────────────────────────────────────────────────────
 
 const profiles = [
@@ -365,7 +356,6 @@ const profiles = [
     advantage:
       "ChatGPT konuşur; Lorenta OS ERP'ye yazar. Aradaki fark: genel bilgi ile şirket bağlamına dayalı aksiyon kapasitesi.",
   },
-
 ];
 
 // ─── Sub-components ───────────────────────────────────────────────────────────
@@ -396,70 +386,6 @@ function Cell({ val, highlight }: { val: Val; highlight?: boolean }) {
     >
       ◐
     </span>
-  );
-}
-
-function ScoreCard({
-  label,
-  sublabel,
-  score,
-  total,
-  isLorenta,
-}: {
-  label: string;
-  sublabel?: string;
-  score: number;
-  total: number;
-  isLorenta?: boolean;
-}) {
-  const pct = Math.round((score / total) * 100);
-
-  if (isLorenta) {
-    return (
-      <div className="relative overflow-hidden rounded-xl border border-signal/30 bg-signal/[0.08] p-4">
-        <p className="truncate font-mono text-[10px] uppercase tracking-wider text-signal/60">
-          {label}
-        </p>
-        {sublabel && (
-          <p className="truncate font-mono text-[10px] text-signal/40">{sublabel}</p>
-        )}
-        <p className="mt-1.5 font-barlow text-2xl font-extrabold text-signal">
-          {score}
-          <span className="text-sm font-normal text-signal/40">/{total}</span>
-        </p>
-        <div className="mt-2 h-1 w-full rounded-full bg-signal/20">
-          <div
-            className="h-1 rounded-full bg-signal"
-            style={{ width: `${pct}%` }}
-          />
-        </div>
-      </div>
-    );
-  }
-
-  return (
-    <div className="rounded-xl border border-white/8 bg-white/[0.025] p-4 group-data-[inverted=true]/theme:border-black/8 group-data-[inverted=true]/theme:bg-black/[0.025]">
-      <p className="truncate font-mono text-[10px] uppercase tracking-wider text-white/30 group-data-[inverted=true]/theme:text-black/35">
-        {label}
-      </p>
-      {sublabel && (
-        <p className="truncate font-mono text-[10px] text-white/20 group-data-[inverted=true]/theme:text-black/25">
-          {sublabel}
-        </p>
-      )}
-      <p className="mt-1.5 font-barlow text-2xl font-extrabold text-white/40 group-data-[inverted=true]/theme:text-black/40">
-        {score}
-        <span className="text-sm font-normal text-white/20 group-data-[inverted=true]/theme:text-black/20">
-          /{total}
-        </span>
-      </p>
-      <div className="mt-2 h-1 w-full rounded-full bg-white/10 group-data-[inverted=true]/theme:bg-black/10">
-        <div
-          className="h-1 rounded-full bg-white/35 group-data-[inverted=true]/theme:bg-black/35"
-          style={{ width: `${pct}%` }}
-        />
-      </div>
-    </div>
   );
 }
 
@@ -498,7 +424,7 @@ export default function ComparePage() {
               <span className="text-signal">Karşılaştırdık</span>
             </h1>
             <p className="mt-4 text-base leading-relaxed text-white/55 group-data-[inverted=true]/theme:text-black/55">
-              Yerel ERP'lerden küresel devlere, genel AI araçlarından doğrudan
+              Yerel ERP&apos;lerden küresel devlere, genel AI araçlarından doğrudan
               rakiplere — 7 çözümü 22 kritik özellik üzerinden ele aldık.
             </p>
             <div className="mt-6 flex flex-wrap items-center gap-4 font-mono text-xs text-white/30 group-data-[inverted=true]/theme:text-black/35">
@@ -518,7 +444,7 @@ export default function ComparePage() {
         {/* ── Main Comparison Table ── */}
         <Reveal>
           <div className="mb-4 overflow-x-auto rounded-2xl border border-white/10 group-data-[inverted=true]/theme:border-black/10">
-            <table className="w-full min-w-[1080px] border-collapse text-sm">
+            <table className="w-full min-w-270 border-collapse text-sm">
               {/* ── Head ── */}
               <thead>
                 {/* Group label row */}
@@ -581,7 +507,7 @@ export default function ComparePage() {
                 {featureGroups.map((group, gi) => (
                   <Fragment key={gi}>
                     {/* Category divider */}
-                    <tr className="border-b border-t border-white/8 bg-white/[0.02] group-data-[inverted=true]/theme:border-black/8 group-data-[inverted=true]/theme:bg-black/[0.02]">
+                    <tr className="border-b border-t border-white/8 bg-white/2 group-data-[inverted=true]/theme:border-black/8 group-data-[inverted=true]/theme:bg-black/2">
                       <td
                         colSpan={9}
                         className="px-6 py-3 font-mono text-[10px] uppercase tracking-[0.2em] text-white/38 group-data-[inverted=true]/theme:text-black/43"
@@ -594,7 +520,7 @@ export default function ComparePage() {
                     {group.features.map((row, ri) => (
                       <tr
                         key={ri}
-                        className={`border-b border-white/5 transition-colors hover:bg-white/[0.02] group-data-[inverted=true]/theme:border-black/5 group-data-[inverted=true]/theme:hover:bg-black/[0.02] ${
+                        className={`border-b border-white/5 transition-colors hover:bg-white/2 group-data-[inverted=true]/theme:border-black/5 group-data-[inverted=true]/theme:hover:bg-black/2 ${
                           gi === featureGroups.length - 1 &&
                           ri === group.features.length - 1
                             ? "border-b-0"
@@ -687,7 +613,7 @@ export default function ComparePage() {
               {profiles.map((p) => (
                 <div
                   key={p.groupLabel}
-                  className="rounded-2xl border border-white/8 bg-white/[0.02] p-6 group-data-[inverted=true]/theme:border-black/8 group-data-[inverted=true]/theme:bg-black/[0.02]"
+                  className="rounded-2xl border border-white/8 bg-white/2 p-6 group-data-[inverted=true]/theme:border-black/8 group-data-[inverted=true]/theme:bg-black/2"
                 >
                   <div className="mb-4 flex items-start justify-between gap-3">
                     <div>
@@ -722,7 +648,7 @@ export default function ComparePage() {
                       </p>
                     </div>
 
-                    <div className="rounded-xl border border-signal/20 bg-signal/[0.05] px-4 py-3">
+                    <div className="rounded-xl border border-signal/20 bg-signal/5 px-4 py-3">
                       <p className="mb-1 font-mono text-[10px] uppercase tracking-wider text-signal/50">
                         Lorenta&apos;nın Farkı
                       </p>
@@ -737,8 +663,6 @@ export default function ComparePage() {
           </div>
         </Reveal>
 
-        
-
         {/* ── Footnote ── */}
         <Reveal>
           <p className="mb-16 text-xs leading-relaxed text-white/20 group-data-[inverted=true]/theme:text-black/25">
@@ -750,8 +674,6 @@ export default function ComparePage() {
             desteklendiğini gösterir. Son güncelleme: Haziran 2026.
           </p>
         </Reveal>
-
-       
       </Container>
     </div>
   );
