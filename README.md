@@ -1,6 +1,6 @@
 # LorentaOS — Web
 
-**The Cognitive Operating System for Autonomous Enterprises.**
+**The Cognitive Operating System for Enterprises.**
 
 Bu repo, LorentaOS markasının halka açık web sitesini barındırır. Tasarım sistemi "Sessiz Lüks" eksenindedir; mühendislik tarafı modern, az bağımlı ve performans-odaklıdır.
 

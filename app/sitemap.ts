@@ -1,9 +1,7 @@
 import type { MetadataRoute } from "next";
 import { siteConfig } from "@/lib/site";
-/**
- * Statik sayfa listesi. Dinamik içerik (blog, case study) eklendiğinde
- * burada CMS'ten çekilen kayıtları map'leyeceğiz.
- */
+import { getAllPosts } from "@/lib/markdown";
+
 const staticRoutes: ReadonlyArray<{
   path: string;
   priority: number;
@@ -27,8 +25,8 @@ const staticRoutes: ReadonlyArray<{
   { path: "/solutions/supply-chain", priority: 0.8, changeFrequency: "monthly", lastModified: "2026-06-20" },
   { path: "/pricing", priority: 0.9, changeFrequency: "monthly", lastModified: "2026-06-20" },
   { path: "/customers", priority: 0.8, changeFrequency: "weekly", lastModified: "2026-06-20" },
-  { path: "/resources", priority: 0.7, changeFrequency: "weekly", lastModified: "2026-06-20" },
-  { path: "/resources/blog", priority: 0.7, changeFrequency: "weekly", lastModified: "2026-06-20" },
+  { path: "/resources", priority: 0.7, changeFrequency: "weekly", lastModified: "2026-06-22" },
+  { path: "/resources/blog", priority: 0.7, changeFrequency: "weekly", lastModified: "2026-06-22" },
   { path: "/resources/guides", priority: 0.7, changeFrequency: "monthly", lastModified: "2026-06-20" },
   { path: "/resources/compare", priority: 0.7, changeFrequency: "monthly", lastModified: "2026-06-20" },
   { path: "/demo", priority: 0.9, changeFrequency: "yearly", lastModified: "2026-06-20" },
@@ -41,11 +39,25 @@ const staticRoutes: ReadonlyArray<{
   { path: "/legal/terms", priority: 0.3, changeFrequency: "yearly", lastModified: "2026-06-20" },
   { path: "/legal/cookies", priority: 0.3, changeFrequency: "yearly", lastModified: "2026-06-20" },
 ];
-export default function sitemap(): MetadataRoute.Sitemap {
-  return staticRoutes.map(({ path, priority, changeFrequency, lastModified }) => ({
-    url: `${siteConfig.url}${path}`,
+
+const baseUrl = siteConfig.url.replace(/\/$/, "");
+
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+  const posts = await getAllPosts();
+
+  const staticEntries: MetadataRoute.Sitemap = staticRoutes.map(({ path, priority, changeFrequency, lastModified }) => ({
+    url: `${baseUrl}${path}`,
     lastModified: new Date(lastModified),
     changeFrequency,
     priority,
   }));
+
+  const blogEntries: MetadataRoute.Sitemap = posts.map((post) => ({
+  url: `${baseUrl}/resources/blog/${post.slug}`,
+  lastModified: new Date(post.meta.date),
+  changeFrequency: "weekly",
+  priority: 0.6,
+}));
+
+  return [...staticEntries, ...blogEntries];
 }

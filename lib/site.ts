@@ -8,8 +8,8 @@ export const siteConfig = {
   url: "https://lorentaos.com",
   tagline: "Run your business on autopilot.",
   description:
-    "The cognitive operating system for autonomous enterprises. Closed-loop architecture, KVKK and EU AI Act compliant.",
-  positioning: "The Cognitive Operating System for Autonomous Enterprises",
+    "The cognitive operating system for enterprises.",
+  positioning: "The Cognitive Operating System for Enterprises",
 
   // Sosyal
   social: {

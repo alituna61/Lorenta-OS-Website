@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { Container } from "@/components/ui/Container";
 import { Section } from "@/components/ui/Section";
 import { CtaBanner } from "@/components/sections/CtaBanner";
+import { getAllPosts } from "@/lib/markdown";
 
 export const metadata: Metadata = {
   title: "Blog",
@@ -10,18 +12,6 @@ export const metadata: Metadata = {
 };
 
 const upcoming = [
-  {
-    title: "LLM’ler ERP verisinde neden başarısız olur — ve bunu nasıl çözdük",
-    tag: "Mimari",
-    preview:
-      "ERP verisi yoğun, ilişkisel ve bağlama bağımlıdır. Standart RAG hatları üzerinde halüsinasyon görür. İşte bunu çözmek için kurduğumuz hibrit erişim yaklaşımı.",
-  },
-  {
-    title: "Kurumsal yapay zekânın token ekonomisi",
-    tag: "Strateji",
-    preview:
-      "Canlı ERP verisi üzerinde asistan çalıştırmak, naif yapılırsa pahalıdır. Token bütçesi modelimizi ve bunun otonom operasyonun birim ekonomisini neden değiştirdiğini paylaşıyoruz.",
-  },
   {
     title: "KVKK, GDPR değildir — ve bu yapay zekâ sistemleri için önemlidir",
     tag: "Uyum",
@@ -37,6 +27,8 @@ const upcoming = [
 ];
 
 export default function BlogPage() {
+  const publishedPosts = getAllPosts();
+
   return (
     <>
       <Section spacing="default" className="border-b border-border-subtle">
@@ -48,7 +40,7 @@ export default function BlogPage() {
             <h1 className="text-h2 sm:text-display">Ekipten saha notları.</h1>
             <p className="max-w-2xl text-body text-ink-secondary">
               Mimari kararlar, çıkarılan dersler ve bilişsel sistemlerin nereye
-              gittiğine dair ara sıra filtresiz görüşler. Çok yakında.
+              gittiğine dair ara sıra filtresiz görüşler.
             </p>
           </div>
         </Container>
@@ -56,10 +48,39 @@ export default function BlogPage() {
 
       <Section spacing="default">
         <Container width="default">
+          {publishedPosts && publishedPosts.length > 0 && (
+            <div className="mb-16">
+              <div className="divide-y divide-border-subtle">
+                {publishedPosts.map((post) => (
+                  <Link
+                    key={post.slug}
+                    href={`/resources/blog/${post.slug}`}
+                    className="group block rounded-lg -mx-4 px-4 py-8 transition-colors hover:bg-surface-hover"
+                  >
+                    <div className="mb-3 flex items-center gap-3">
+                      <span className="rounded-full border border-border-subtle px-3 py-1 font-mono text-micro text-ink-tertiary">
+                        {post.meta.tag}
+                      </span>
+                      <span className="font-mono text-micro text-ink-tertiary">
+                        Yayında
+                      </span>
+                    </div>
+                    <h2 className="mb-2 text-h4 font-medium group-hover:text-brand-primary">
+                      {post.meta.title}
+                    </h2>
+                    <p className="text-body text-ink-secondary">
+                      {post.meta.preview}
+                    </p>
+                  </Link>
+                ))}
+              </div>
+            </div>
+          )}
+
           <p className="mb-8 font-mono text-micro uppercase tracking-widest text-ink-tertiary">
             İlk gelecekler
           </p>
-          <div className="divide-y divide-border-subtle">
+          <div className="cursor-not-allowed divide-y divide-border-subtle opacity-70">
             {upcoming.map((post) => (
               <div key={post.title} className="py-8">
                 <div className="mb-3 flex items-center gap-3">
